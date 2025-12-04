@@ -41,6 +41,12 @@ android {
         abortOnError false
         disable 'MissingTranslation'
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -52,7 +58,7 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release
+                from components.findByName("release")
                 groupId = 'com.github.We-Are-Empire.AndroidUSBCamera'
                 artifactId = 'libuvc'
                 version = rootProject.ext.versionName
